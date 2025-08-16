@@ -1,17 +1,25 @@
-[tool.poetry]
+# pyproject.toml
+# This project is aligned with PEP 621 (https://peps.python.org/pep-0621/)
+# Poetry now recommends using the [project] table instead of [tool.poetry].
+
+[project]
 name = "sudoku"
 version = "0.1.0"
 description = "A minimalist Sudoku game built with Pygame."
-authors = ["Robert Boivin <poivronjaune@gmail.com>"]
-license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/yourusername/sudoku-pygame"
-repository = "https://github.com/yourusername/sudoku-pygame"
+license = { text = "MIT" }
+authors = [
+    { name = "Robert Boivin", email = "poivronjaune@gmail.com" }
+]
 keywords = ["sudoku", "pygame", "game"]
+requires-python = ">=3.12,<3.13"
 
-[tool.poetry.dependencies]
-python = ">=3.12,<3.13"
-pygame = "^2.0.0"
+dependencies = [
+    "pygame>=2.0.0"
+]
+
+# Project URLs (inline table, must be compact)
+urls = { Homepage = "https://github.com/poivronjaune/vibecoding-sudoku", Repository = "https://github.com/poivronjaune/vibecoding-sudoku/tree/main/sudoku-pygame" }
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

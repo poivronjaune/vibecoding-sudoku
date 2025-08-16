@@ -11,14 +11,28 @@ This project is a minimalist Sudoku game built using Pygame. It allows users to 
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/yourusername/sudoku-pygame.git
-   cd sudoku-pygame
+   git clone https://github.com/poivronjaune/vibecoding-sudoku.git
+   cd vibecoding-sudoku
+   ```
+   Make sure your python wheel and distlib are updated  
+   ```bash
+   py -3.12 -m pip install --upgrade pip setuptools wheel
+   py -3.12 -m pip install "virtualenv<20.33,>=20.26.6" --force-reinstall  
+   py -3.12 -m pip install --upgrade distlib
    ```
 
 2. **Install Poetry**
    If you haven't installed Poetry yet, you can do so by following the instructions on the [Poetry website](https://python-poetry.org/docs/#installation).
 
-3. **Install Dependencies**
+3. **Setup Poetry virtaul env & Install Dependencies**  
+   Make sure no residual poetry virtual environment exist
+   ```bash   
+   poetry env remove python
+   ```
+   Setup poetry to use the python launcher with the correct python version you want to use  
+   ```bash
+   poetry env use "$(py -3.12 -c "import sys; print(sys.executable)")"
+   ```
    Use Poetry to install the project dependencies:
    ```bash
    poetry install

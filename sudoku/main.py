@@ -1,33 +1,29 @@
+# main.py
 import pygame
 import sys
 from sudoku.board import Board
 from sudoku.ui import UI
 
 def main():
-    width, height = 600, 700  # or whatever dimensions you want
+    width, height = 600, 700
     ui = UI(width, height)
 
     pygame.init()
-    screen = pygame.display.set_mode((600, 600))
     pygame.display.set_caption("Sudoku Game")
 
     clock = pygame.time.Clock()
     board = Board()
 
+    selected_number = None
+
     while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+        # Handle input
+        selected_number = ui.handle_input() or selected_number
 
-            ui.handle_event(event, board)
-
-        screen.fill((255, 255, 255))
-        board.draw(screen)
-        ui.draw()
-
-        pygame.display.flip()
-        clock.tick(60)
+        # Clear and redraw everything
+        ui.draw(board=board.grid, selected_number=selected_number)
+        ui.set_clock(clock)
+        ui.update()
 
 if __name__ == "__main__":
     main()

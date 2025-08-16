@@ -1,35 +1,78 @@
+# generator.py
+import random
+from copy import deepcopy
+
 class PuzzleGenerator:
     def __init__(self, difficulty='medium'):
+        """
+        difficulty: 'easy', 'medium', 'hard'
+        """
         self.difficulty = difficulty
         self.board = self.generate_board()
 
     def generate_board(self):
-        # Placeholder for board generation logic
-        # This method should create a valid Sudoku board
-        pass
+        """Generate a full valid Sudoku board using backtracking."""
+        board = [[0 for _ in range(9)] for _ in range(9)]
+        self._fill_board(board)
+        self.remove_numbers(board)
+        return board
 
-    def remove_numbers(self):
-        # Placeholder for logic to remove numbers from the board
-        # This method should ensure the puzzle has a unique solution
-        pass
+    def _fill_board(self, board):
+        """Recursive backtracking to fill the board completely."""
+        empty = self._find_empty(board)
+        if not empty:
+            return True  # Board completely filled
+        row, col = empty
+        numbers = list(range(1, 10))
+        random.shuffle(numbers)
+        for num in numbers:
+            if self.is_valid(board, row, col, num):
+                board[row][col] = num
+                if self._fill_board(board):
+                    return True
+                board[row][col] = 0  # Backtrack
+        return False
+
+    def remove_numbers(self, board):
+        """Remove numbers from the filled board to create a puzzle."""
+        if self.difficulty == 'easy':
+            removals = 35
+        elif self.difficulty == 'medium':
+            removals = 45
+        else:  # hard
+            removals = 55
+
+        while removals > 0:
+            row = random.randint(0, 8)
+            col = random.randint(0, 8)
+            if board[row][col] != 0:
+                board[row][col] = 0
+                removals -= 1
 
     def is_valid(self, board, row, col, num):
-        # Check if placing num in board[row][col] is valid
-        for x in range(9):
-            if board[row][x] == num or board[x][col] == num:
+        """Check if placing num at (row,col) is valid."""
+        # Row and column
+        for i in range(9):
+            if board[row][i] == num or board[i][col] == num:
                 return False
 
+        # 3x3 box
         start_row, start_col = 3 * (row // 3), 3 * (col // 3)
         for i in range(3):
             for j in range(3):
-                if board[i + start_row][j + start_col] == num:
+                if board[start_row + i][start_col + j] == num:
                     return False
         return True
 
-    def solve(self, board):
-        # Placeholder for solving logic
-        # This method should implement backtracking to solve the Sudoku puzzle
-        pass
+    def _find_empty(self, board):
+        """Return the first empty cell (row,col), or None if full."""
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] == 0:
+                    return (i, j)
+        return None
 
     def get_puzzle(self):
-        return self.board
+        """Return a copy of the generated puzzle."""
+        return deepcopy(self.board)
+

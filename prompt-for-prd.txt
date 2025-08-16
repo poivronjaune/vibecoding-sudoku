@@ -1,0 +1,26 @@
+Help me design a game to practice SUDOKU techniques.
+
+I want a product requirements document (PRD) that will serve as the basis for the game we will generate using a good LLM.
+
+Here are the first requirements we will start with (we add more requirements as the document evoves):
+1-A grid to place numbers in and display the initial numbers of the puzzle
+2-A panel with the available numbers to place (the panel numbers will become grayed out when all numbers are of that kind are placed on the puzzle)
+3-A generator of sudoku that will produce a puzzle that can be resolved
+4-The generator must classify the generated puzzle as easy, meduim or hard
+5-A timer at the top of the game screen to display the time the puzzle is being played
+6-A pause button to suspend the game (the time must stop and the grid must be covered to hide the numbers) cheating prevention :)
+7-Graphics must be simple and minimalist
+
+Please generate a PRD with these initial requirements.
+
+
+PROMPT for code generation
+I have created 3 PRD documents to descripbe the application I want. Please use these documents to create a fully functional python game using pygame. I wish to have a package called sudoku in which you will put all the code.
+In the root folder, create a TOML file with poetry syntax for dependency. In the required python languag use a minimum of python 3.10 and maximum of less than pythn 3.13.
+
+Generate the files with code and add these to my root folder. Create any subfolder that are required and any files that are not already created.
+Add a .gitignore file for github
+Add a readme file to explain hoe to install/check dependencies, poetry and python.
+
+GO DO IT
+

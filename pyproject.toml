@@ -24,3 +24,6 @@ urls = { Homepage = "https://github.com/poivronjaune/vibecoding-sudoku", Reposit
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[project.scripts]
+sudoku = "sudoku.main:main"
